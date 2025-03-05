@@ -1,0 +1,2668 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iceland Explorer - Twoja Przygoda na Islandii (2025)</title>
+    <style>
+        /* Zmienne CSS z nową paletą kolorów */
+        :root {
+            --bg-primary: #0D1117;
+            --bg-secondary: #161B22;
+            --bg-tertiary: #21262D;
+            --text-primary: #F0F6FC;
+            --text-secondary: #8B949E;
+            --accent-primary: #7C3AED;
+            --accent-secondary: #4C1D95;
+            --aurora-green: #26D07C;
+            --aurora-blue: #2563EB;
+            --aurora-purple: #9333EA;
+            --lava-gradient: linear-gradient(135deg, #ef4444 0%, #7C3AED 100%);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 24px;
+        }
+
+        /* Reset i bazowe style */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            background: var(--bg-primary);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        /* Typografia */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.3;
+            background: var(--lava-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); }
+        h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+        p {
+            margin-bottom: 1rem;
+            font-size: clamp(1rem, 2vw, 1.1rem);
+            color: var(--text-secondary);
+        }
+
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+            position: relative;
+            scroll-margin-top: 5rem;
+        }
+
+        /* Utility classes */
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            background: var(--lava-gradient);
+            color: var(--text-primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Header styles */
+        header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--lava-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+            text-shadow: 0 0 10px var(--aurora-purple);
+        }
+
+        /* Hero section */
+        .hero {
+            min-height: 85vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(13, 17, 23, 0.8), rgba(13, 17, 23, 0.8)),
+                        url('https://picsum.photos/1200/600');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--lava-gradient);
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 650px;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Sekcja tytułowa */
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--iceland-blue), var(--iceland-glacier));
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: white;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            background: linear-gradient(to right, var(--iceland-dark), var(--iceland-blue));
+            color: white;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            flex: 1;
+        }
+
+        .card-footer {
+            padding: 1.5rem;
+            background-color: rgba(0, 0, 0, 0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Form elements */
+        .form-container {
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            background: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-weight: 600;
+            color: var(--iceland-dark);
+        }
+
+        input, select, textarea {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--iceland-blue);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 161, 214, 0.2);
+        }
+
+       
+        /* Atrakcje */
+        .attraction {
+            margin-bottom: 2rem;
+        }
+
+        .attraction-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 1.5rem;
+            background: linear-gradient(to right, var(--iceland-blue), var(--iceland-glacier));
+            color: white;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .attraction-header:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .attraction-content {
+            display: none;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            margin-top: -8px;
+            box-shadow: var(--shadow-md);
+            z-index: 1;
+            position: relative;
+        }
+
+        .attraction-content.active {
+            display: grid;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .attraction-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Rezultaty wyszukiwania i formularzy */
+        .result-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: var(--radius-md);
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .result-container.active {
+            display: block;
+        }
+
+        /* AI Section */
+        .ai-section {
+            padding: 2.5rem;
+            border-radius: var(--radius-xl);
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+        }
+
+        .ai-response {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: var(--radius-md);
+            border-left: 4px solid var(--iceland-blue);
+            display: none;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .ai-response.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Blog posts */
+        .blog-post {
+            padding: 2rem;
+            background: white;
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .blog-post:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--iceland-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .read-more:hover {
+            color: var(--iceland-dark);
+            transform: translateX(5px);
+        }
+
+        /* Stopka */
+        footer {
+            background: var(--iceland-dark);
+            color: var(--iceland-white);
+            padding: 4rem 0 1.5rem;
+            margin-top: 5rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+
+        .footer-title::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--iceland-blue);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--iceland-glacier);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background: var(--iceland-blue);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Media queries dla responsywności */
+        @media (max-width: 1024px) {
+            .section {
+                padding: 4rem 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 70%;
+                height: calc(100vh - 70px);
+                background: var(--iceland-dark);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem;
+                transition: var(--transition);
+                box-shadow: var(--shadow-lg);
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav a {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .attraction-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 2.5rem 0;
+            }
+
+            .p-8 { padding: 1.5rem; }
+            .p-6 { padding: 1rem; }
+        }
+
+        /* Style dla sekcji wiadomości */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            margin: 0;
+        }
+
+        .button {
+            padding: 0.5rem 1rem;
+            background: var(--iceland-blue);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .button:hover {
+            background: var(--iceland-dark-blue);
+        }
+
+        .button:disabled {
+            background: var(--iceland-gray);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .section-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        /* Style dla kafelków z wiadomościami */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .news-image-container {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .news-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover .news-image {
+            transform: scale(1.05);
+        }
+
+        .news-source-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--iceland-blue);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .news-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--iceland-dark);
+            line-height: 1.4;
+        }
+
+        .news-description {
+            color: var(--iceland-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .news-metadata {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--iceland-gray);
+            font-size: 0.875rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding-top: 1rem;
+        }
+
+        .news-date {
+            color: var(--iceland-gray);
+        }
+
+        .news-link {
+            color: var(--iceland-blue);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .news-link:hover {
+            color: var(--iceland-dark-blue);
+            text-decoration: underline;
+        }
+
+        .news-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            grid-column: 1 / -1;
+        }
+
+        .error-message {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 200, 200, 0.8);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            color: #d32f2f;
+            grid-column: 1 / -1;
+        }
+
+        .retry-button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--iceland-blue);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .retry-button:hover {
+            background: var(--iceland-dark-blue);
+        }
+
+        @media (max-width: 768px) {
+            .section-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .news-image-container {
+                height: 180px;
+            }
+        }
+
+        /* Weather section styles */
+        .weather-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .weather-map-card {
+            width: 100%;
+            max-width: 1280px;
+            height: 700px;
+            margin: 0 auto;
+            position: relative;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        .weather-map-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .weather-map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: var(--radius-md);
+        }
+
+        @media (max-width: 768px) {
+            .weather-map-card {
+                height: 500px;
+                margin: 1rem;
+            }
+        }
+
+        /* News section */
+        .news-section {
+            background: var(--bg-secondary);
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60%;
+            height: 2px;
+            background: var(--lava-gradient);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        /* Attraction styles */
+        .attraction {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid var(--glass-border);
+        }
+
+        .attraction:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .attraction-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .attraction-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .attraction-content.active {
+            max-height: 2000px;
+            padding: 1.5rem;
+        }
+
+        .attraction-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Form styles */
+        .form-container {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--glass-border);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--glass-border);
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px var(--accent-secondary);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Loading animation */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .loading::after {
+            content: '';
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 2px solid var(--text-secondary);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            margin-left: 0.5rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0.5rem 1rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+        }
+
+        /* Karty z wiadomościami */
+        .news-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--lava-gradient);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .news-card:hover::before {
+            opacity: 1;
+        }
+
+        .news-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .news-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--glass-border);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* Przyciski */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            border: none;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            gap: 0.5rem;
+        }
+
+        .button:hover {
+            background: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Sekcja atrakcji */
+        .attraction {
+            margin-bottom: 2rem;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+        }
+
+        .attraction-header {
+            padding: 1.5rem;
+            background: var(--bg-tertiary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .attraction-header:hover {
+            background: var(--accent-secondary);
+        }
+
+        .attraction-header h3 {
+            color: var(--text-primary);
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .toggle {
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .attraction-content {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--bg-secondary);
+        }
+
+        .attraction-content.active {
+            padding: 1.5rem;
+            max-height: 2000px;
+        }
+
+        .attraction-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Formularze */
+        .form-container {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--glass-border);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--glass-border);
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px var(--accent-secondary);
+        }
+
+        /* Animacje */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* Responsywność */
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .news-card {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Elementy interaktywne */
+        .interactive-element {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interactive-element::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--lava-gradient);
+            opacity: 0;
+            transition: var(--transition);
+            pointer-events: none;
+        }
+
+        .interactive-element:hover::after {
+            opacity: 0.1;
+        }
+
+        /* Style dla sekcji */
+        .section {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--lava-gradient);
+            opacity: 0.1;
+        }
+
+        /* Nagłówki sekcji */
+        .section-title {
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--lava-gradient);
+        }
+
+        /* Efekty hover dla kart */
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-primary);
+        }
+
+        /* Efekty świetlne */
+        .glow {
+            position: relative;
+        }
+
+        .glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(
+                circle at var(--x, 50%) var(--y, 50%),
+                rgba(124, 58, 237, 0.15) 0%,
+                rgba(124, 58, 237, 0) 50%
+            );
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .glow:hover::before {
+            opacity: 1;
+        }
+
+        /* Dodatkowe style dla przycisków */
+        .button.primary {
+            background: var(--lava-gradient);
+            color: white;
+        }
+
+        .button.secondary {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--glass-border);
+        }
+
+        .button.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .button.secondary:hover {
+            background: var(--bg-secondary);
+            border-color: var(--accent-primary);
+        }
+
+        /* Style dla list */
+        .list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .list-item {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+
+        .list-item:hover {
+            transform: translateX(4px);
+            border-color: var(--accent-primary);
+        }
+
+        /* Dodatkowe efekty dla nagłówków */
+        .gradient-text {
+            background: var(--lava-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Style dla tooltipów */
+        [data-tooltip] {
+            position: relative;
+        }
+
+        [data-tooltip]::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.5rem 1rem;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        [data-tooltip]:hover::before {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(-8px);
+        }
+
+        /* Style dla sekcji i nagłówków */
+        .section {
+            position: relative;
+            padding: 4rem 0;
+            overflow: hidden;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section-title {
+            position: relative;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+            background: var(--lava-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--lava-gradient);
+        }
+
+        .section-description {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Kontenery sekcji */
+        .section .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Style dla przycisków w nagłówkach */
+        .section-header .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            justify-content: center;
+        }
+
+        /* Responsywność */
+        @media (max-width: 768px) {
+            .section {
+                padding: 3rem 0;
+            }
+
+            .section-header {
+                margin-bottom: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .section-description {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Nagłówek z logo i menu -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">Iceland <span>Explorer</span></a>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <nav>
+                <ul id="mainMenu">
+                    <li><a href="#news">Aktualności</a></li>
+                    <li><a href="#weather">Pogoda</a></li>
+                    <li><a href="#atrakcje">Atrakcje</a></li>
+                    <li><a href="#hotele">Hotele</a></li>
+                    <li><a href="#samochody">Samochody</a></li>
+                    <li><a href="#planowanie">Planowanie</a></li>
+                    <li><a href="#budzet">Budżet</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content animate-fade-in">
+                <h1>Odkryj magię Islandii</h1>
+                <p>Planuj swoją podróż po krainie lodu i ognia. Zorza polarna, gejzery, wodospady i wiele więcej czeka na Ciebie.</p>
+                <a href="#planowanie" class="btn btn-primary">Zaplanuj podróż</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekcja wiadomości -->
+    <section class="section news-section" id="news">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Aktualności z Islandii</h2>
+                <div class="button-group">
+                    <button id="refresh-news" class="button">Odśwież</button>
+                </div>
+            </div>
+            <div id="news-container" class="cards-grid">
+                <div class="loading">Ładowanie wiadomości...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekcja pogody i warunków -->
+    <section class="section weather-section" id="weather">
+        <div class="section-header">
+            <h2 class="section-title">Pogoda i Warunki</h2>
+        </div>
+        <div class="weather-map-card">
+            <div class="weather-map-container">
+                <iframe 
+                    src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=6&overlay=wind&product=ecmwf&level=surface&lat=64.924&lon=-19.424&calendar=now" 
+                    frameborder="0"
+                ></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekcja atrakcji -->
+    <section class="section" id="atrakcje">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Atrakcje turystyczne</h2>
+                <p class="section-description">Odkryj najpiękniejsze miejsca Islandii</p>
+            </div>
+            <div class="attractions-grid">
+                <!-- Zawartość atrakcji -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekcja hoteli -->
+    <section class="section" id="hotele">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Rezerwacja hoteli</h2>
+                <p class="section-description">Znajdź idealne miejsce na nocleg</p>
+            </div>
+            <div class="form-container">
+                <form id="hotel-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="arrival-date">Data przyjazdu</label>
+                            <input type="date" id="arrival-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="departure-date">Data wyjazdu</label>
+                            <input type="date" id="departure-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="guests">Liczba osób</label>
+                            <select id="guests" required>
+                                <option value="1">1 osoba</option>
+                                <option value="2" selected>2 osoby</option>
+                                <option value="3">3 osoby</option>
+                                <option value="4">4 osoby</option>
+                                <option value="5">5 osób</option>
+                                <option value="6">6+ osób</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="button primary">Szukaj dostępnych hoteli</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekcja samochodów -->
+    <section class="section" id="samochody">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Wynajem samochodów</h2>
+                <p class="section-description">Wybierz odpowiedni pojazd</p>
+            </div>
+            <div class="form-container">
+                <form id="car-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="car-type">Typ samochodu</label>
+                            <select id="car-type" required>
+                                <option value="economy">Ekonomiczny</option>
+                                <option value="compact">Kompaktowy</option>
+                                <option value="suv" selected>SUV/4x4</option>
+                                <option value="premium">Premium</option>
+                                <option value="camper">Camper/Van</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="pickup-date">Data odbioru</label>
+                            <input type="date" id="pickup-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="return-date">Data zwrotu</label>
+                            <input type="date" id="return-date" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="button primary">Szukaj dostępnych pojazdów</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekcja bloga -->
+    <section class="section" id="blog">
+        <div class="container">
+            <h2 class="section-title">Blog o Islandii</h2>
+            
+            <div class="blog-post animate-fade-in">
+                <h3>10 ukrytych skarbów Islandii, których nie znajdziesz w przewodnikach</h3>
+                <p>Poza popularnymi atrakcjami jak Złoty Krąg czy Błękitna Laguna, Islandia skrywa wiele nieodkrytych przez masową turystykę miejsc. Poznaj sekretne gorące źródła, ukryte wodospady i mniej znane plaże z czarnym piaskiem, które zapierają dech w piersiach.</p>
+                <a href="#" class="read-more">Czytaj więcej →</a>
+            </div>
+            
+            <div class="blog-post animate-fade-in" style="animation-delay: 0.2s;">
+                <h3>Islandzka kuchnia - więcej niż fermentowany rekin</h3>
+                <p>Islandzka kuchnia często kojarzy się z kontrowersyjnymi daniami jak hákarl (fermentowany rekin) czy sviđ (gotowana głowa owcy). Tymczasem współczesna gastronomia Islandii to fascynująca mieszanka tradycji i nowoczesności, oparta na świeżych, lokalnych składnikach - od wyśmienitych owoców morza po organiczne jagnięciny.</p>
+                <a href="#" class="read-more">Czytaj więcej →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sekcja porad AI -->
+    <section class="section" id="ai-porady">
+        <div class="container">
+            <h2 class="section-title">Porady AI</h2>
+            <div class="ai-section animate-fade-in">
+                <p>Masz pytanie dotyczące podróży po Islandii? Zapytaj naszego asystenta AI!</p>
+                <form id="ai-form" class="mt-4">
+                    <div class="form-group">
+                        <label for="ai-question">Twoje pytanie:</label>
+                        <textarea id="ai-question" rows="3" placeholder="Np. Co zobaczyć w 2 dni?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-4">Zapytaj AI</button>
+                </form>
+
+                <div id="ai-response" class="ai-response">
+                    <!-- Tutaj pojawi się odpowiedź AI -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="planning">
+        <h2 class="section-header">Planowanie Podróży</h2>
+        
+        <!-- Formularz planowania podróży -->
+        <form id="planning-form" class="mt-4">
+            <div class="form-group">
+                <label for="trip-start">Data rozpoczęcia</label>
+                <input type="date" id="trip-start" required>
+            </div>
+            <div class="form-group">
+                <label for="trip-end">Data zakończenia</label>
+                <input type="date" id="trip-end" required>
+            </div>
+            <div class="form-group">
+                <label for="trip-style">Styl podróży</label>
+                <select id="trip-style" required>
+                    <option value="budget">Budżetowy</option>
+                    <option value="comfort">Komfortowy</option>
+                    <option value="luxury">Luksusowy</option>
+                </select>
+            </div>
+            <button type="submit" class="button">Zaplanuj trasę</button>
+        </form>
+    </section>
+
+    <section class="section" id="budget">
+        <h2 class="section-header">Kalkulator Budżetu</h2>
+        
+        <!-- Formularz kalkulatora budżetu -->
+        <form id="budget-form" class="mt-4">
+            <div class="form-group">
+                <label for="days">Liczba dni</label>
+                <input type="number" id="days" min="1" value="7" required>
+            </div>
+            <div class="form-group">
+                <label for="persons">Liczba osób</label>
+                <input type="number" id="persons" min="1" value="2" required>
+            </div>
+            <div class="form-group">
+                <label for="accommodation">Zakwaterowanie</label>
+                <select id="accommodation" required>
+                    <option value="hostel">Hostel</option>
+                    <option value="budget">Hotel budżetowy</option>
+                    <option value="comfort">Hotel komfortowy</option>
+                    <option value="luxury">Hotel luksusowy</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="transport">Transport</label>
+                <select id="transport" required>
+                    <option value="public">Transport publiczny</option>
+                    <option value="economy">Samochód ekonomiczny</option>
+                    <option value="suv">SUV/4x4</option>
+                    <option value="camper">Kamper</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="food">Wyżywienie</label>
+                <select id="food" required>
+                    <option value="budget">Budżetowe</option>
+                    <option value="moderate">Umiarkowane</option>
+                    <option value="expensive">Drogie</option>
+                </select>
+            </div>
+            <button type="submit" class="button">Oblicz budżet</button>
+            <div id="budget-results" class="mt-4" style="display: none;">
+                <!-- Tutaj będą wyświetlane wyniki kalkulacji -->
+            </div>
+        </form>
+    </section>
+
+    <!-- Stopka -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h3 class="footer-title">Iceland Explorer</h3>
+                    <p>Twój najlepszy przewodnik po krainie lodu i ognia. Planuj, odkrywaj i doświadczaj Islandii w najlepszym wydaniu.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">FB</a>
+                        <a href="#" class="social-icon">IG</a>
+                        <a href="#" class="social-icon">TW</a>
+                        <a href="#" class="social-icon">YT</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="footer-title">Nawigacja</h3>
+                    <ul class="footer-links">
+                        <li><a href="#news">Aktualności</a></li>
+                        <li><a href="#weather">Pogoda</a></li>
+                        <li><a href="#atrakcje">Atrakcje</a></li>
+                        <li><a href="#hotele">Hotele</a></li>
+                        <li><a href="#samochody">Samochody</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-title">Informacje</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">O nas</a></li>
+                        <li><a href="#">Polityka prywatności</a></li>
+                        <li><a href="#">Warunki korzystania</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Kontakt</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="footer-title">Kontakt</h3>
+                    <p>Email: kontakt@icelandexplorer.com</p>
+                    <p>Telefon: +48 123 456 789</p>
+                    <p>Adres: ul. Polarna 7, 00-001 Warszawa</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Iceland Explorer. Wszystkie prawa zastrzeżone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Funkcje pomocnicze - ważne, aby były na początku
+        function querySelector(selector) {
+            return document.querySelector(selector);
+        }
+
+        function querySelectorAll(selector) {
+            return document.querySelectorAll(selector);
+        }
+        
+        
+
+        // Baza atrakcji do wyszukiwania planów
+        const attractions = {
+            natura: ["Park Narodowy Þingvellir", "Wodospad Gullfoss", "Gejzer Strokkur", "Laguna Jökulsárlón", "Plaża Reynisfjara", "Wodospad Skógafoss"],
+            kultura: ["Muzeum Narodowe w Reykjaviku", "Harpa (sala koncertowa)", "Osada wikingów w Hafnarfjörður", "Muzeum Osadnictwa w Reykjaviku"],
+            przygoda: ["Trekking po lodowcu Sólheimajökull", "Jazda skuterami śnieżnymi", "Rafting na rzece Hvítá", "Nurkowanie w szczelinie Silfra"],
+            relaks: ["Błękitna Laguna", "Gorące źródła w Reykjadalur", "SPA GeoSea w Húsavík", "Laguna Mývatn"]
+        };
+
+        // Ceny dla kalkulatora budżetu
+        const prices = {
+            accommodation: {
+                hostel: 150,
+                budget: 300,
+                standard: 600,
+                premium: 1200,
+                apartment: 450
+            },
+            activities: {
+                minimal: 0,
+                basic: 200,
+                standard: 450,
+                premium: 900
+            },
+            transport: {
+                public: 70,
+                economy: 200,
+                suv: 450,
+                camper: 700
+            },
+            food: {
+                selfcatering: 80,
+                mixed: 150,
+                restaurants: 250,
+                premium: 500
+            }
+        };
+        
+        // Funkcja pobierająca rzeczywiste dane pogodowe
+        
+
+        // Koszt pobytu (na dzień)
+        const dailyCosts = {
+            accommodation: {
+                camping: 40,
+                hostel: 100,
+                standard: 450,
+                premium: 900
+            },
+            transport: {
+                public: 70,
+                economy: 200,
+                suv: 450,
+                camper: 700
+            },
+            food: {
+                selfcatering: 80,
+                mixed: 150,
+                restaurants: 250,
+                premium: 500
+            }
+        };
+        
+        
+       
+
+        // Obsługa atrakcji - rozwijanie/zwijanie opisów
+        document.querySelectorAll(".attraction-header").forEach(header => {
+            header.addEventListener("click", function() {
+                const targetId = this.getAttribute("data-target");
+                const content = document.querySelector(`#${targetId}`);
+                const allContents = document.querySelectorAll(".attraction-content");
+                
+                // Zamknij wszystkie inne
+                allContents.forEach(item => {
+                    if (item.id !== targetId) {
+                        item.classList.remove("active");
+                        const header = document.querySelector(`[data-target="${item.id}"]`);
+                        if (header) {
+                            header.querySelector(".toggle").textContent = "▼";
+                        }
+                    }
+                });
+                
+                // Przełącz aktualny
+                content.classList.toggle("active");
+                
+                // Aktualizacja ikony
+                const toggle = this.querySelector(".toggle");
+                toggle.textContent = content.classList.contains("active") ? "▲" : "▼";
+            });
+        });
+
+        // Obsługa formularza hoteli
+        document.querySelector("#hotel-form").addEventListener("submit", handleHotelSubmit);
+
+        // Obsługa formularza samochodów
+        document.querySelector("#car-form").addEventListener("submit", handleCarSubmit);
+
+        // Obsługa formularza planowania
+        document.querySelector("#planning-form").addEventListener("submit", handlePlanningSubmit);
+
+        // Obsługa formularza budżetu
+        document.querySelector("#budget-form").addEventListener("submit", handleBudgetSubmit);
+
+        // Funkcje obsługi formularzy
+        function handleHotelSubmit(e) {
+            e.preventDefault();
+            const arrivalDate = document.querySelector("#arrival-date").value;
+            const departureDate = document.querySelector("#departure-date").value;
+            const guests = document.querySelector("#guests").value;
+
+            const button = this.querySelector("button");
+            button.disabled = true;
+            button.textContent = "Wyszukiwanie...";
+
+            setTimeout(() => {
+                console.log("Wyszukiwanie hoteli:", { arrivalDate, departureDate, guests });
+                button.disabled = false;
+                button.textContent = "Szukaj dostępnych hoteli";
+                
+                localStorage.setItem("hotelSearch", JSON.stringify({
+                    arrivalDate,
+                    departureDate,
+                    guests
+                }));
+            }, 1500);
+        }
+
+        function handleCarSubmit(e) {
+            e.preventDefault();
+            const carType = document.querySelector("#car-type").value;
+            const pickupDate = document.querySelector("#pickup-date").value;
+            const returnDate = document.querySelector("#return-date").value;
+
+            const button = this.querySelector("button");
+            button.disabled = true;
+            button.textContent = "Wyszukiwanie...";
+
+            setTimeout(() => {
+                console.log("Wyszukiwanie samochodów:", { carType, pickupDate, returnDate });
+                button.disabled = false;
+                button.textContent = "Szukaj dostępnych pojazdów";
+                
+                localStorage.setItem("carSearch", JSON.stringify({
+                    carType,
+                    pickupDate,
+                    returnDate
+                }));
+            }, 1500);
+        }
+
+        function handlePlanningSubmit(e) {
+            e.preventDefault();
+            const tripStart = document.querySelector("#trip-start").value;
+            const tripEnd = document.querySelector("#trip-end").value;
+            const tripStyle = document.querySelector("#trip-style").value;
+
+            const button = this.querySelector("button");
+            button.disabled = true;
+            button.textContent = "Planowanie...";
+
+            setTimeout(() => {
+                console.log("Planowanie podróży:", { tripStart, tripEnd, tripStyle });
+                button.disabled = false;
+                button.textContent = "Zaplanuj trasę";
+                
+                localStorage.setItem("tripPlan", JSON.stringify({
+                    tripStart,
+                    tripEnd,
+                    tripStyle
+                }));
+            }, 1500);
+        }
+
+        function handleBudgetSubmit(e) {
+            e.preventDefault();
+            const days = document.querySelector("#days").value;
+            const persons = document.querySelector("#persons").value;
+            const accommodation = document.querySelector("#accommodation").value;
+            const transport = document.querySelector("#transport").value;
+            const food = document.querySelector("#food").value;
+
+            const button = this.querySelector("button");
+            button.disabled = true;
+            button.textContent = "Obliczanie...";
+
+            setTimeout(() => {
+                console.log("Kalkulacja budżetu:", { days, persons, accommodation, transport, food });
+                button.disabled = false;
+                button.textContent = "Oblicz budżet";
+                
+                localStorage.setItem("budgetCalc", JSON.stringify({
+                    days,
+                    persons,
+                    accommodation,
+                    transport,
+                    food
+                }));
+            }, 1500);
+        }
+
+        // Obsługa formularza AI
+        document.querySelector("#ai-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const question = document.querySelector("#ai-question").value;
+            
+            if (!question) {
+                alert("Proszę wprowadzić pytanie.");
+                return;
+            }
+            
+            // Symulacja odpowiedzi AI
+            const button = this.querySelector("button");
+            button.disabled = true;
+            button.textContent = "Generowanie odpowiedzi...";
+            
+            setTimeout(() => {
+                const aiResponse = generateAIResponse(question);
+                document.querySelector("#ai-response").innerHTML = aiResponse;
+                document.querySelector("#ai-response").classList.add("active");
+                
+                button.disabled = false;
+                button.textContent = "Zapytaj AI";
+                
+                // Animacja wskazująca, że AI "myśli"
+                document.querySelector("#ai-response").classList.add("animate-pulse");
+                setTimeout(() => {
+                    document.querySelector("#ai-response").classList.remove("animate-pulse");
+                }, 1000);
+            }, 2000);
+        });
+
+        // Generowanie odpowiedzi AI
+        function generateAIResponse(question) {
+            question = question.toLowerCase();
+            let response = '';
+            
+            if (question.includes("2 dni") || question.includes("dwa dni")) {
+                response = `<h4>Co warto zobaczyć w 2 dni?</h4>
+                <p>W ciągu dwóch dni w Islandii polecam skupić się na Złotym Kręgu i okolicach Reykjaviku:</p>
+                <p><strong>Dzień 1:</strong> Złoty Krąg (Þingvellir, Geysir, Gullfoss) - te trzy atrakcje położone są blisko siebie i stanowią klasyczny jednodniowy wyjazd z Reykjaviku.</p>
+                <p><strong>Dzień 2:</strong> Półwysep Reykjanes z Błękitną Laguną (zarezerwuj wcześniej) i wybrzeże południowe do Vik (czarne plaże), jeśli masz samochód.</p>
+                <p>Pamiętaj, że w zależności od pory roku dzień może być bardzo krótki zimą lub bardzo długi latem, co wpłynie na ilość miejsc, które zdążysz odwiedzić.</p>`;
+            }
+            else if (question.includes("zorza") || question.includes("aurora") || question.includes("northern lights")) {
+                response = `<h4>Kiedy i gdzie zobaczyć zorzę polarną?</h4>
+                <p>Najlepszy czas na obserwację zorzy polarnej w Islandii to okres od września do kwietnia, gdy noce są najciemniejsze. Wymagane są trzy czynniki:</p>
+                <ul>
+                    <li>Ciemne, bezchmurne niebo</li>
+                    <li>Aktywność słoneczna (sprawdź prognozy zorzy)</li>
+                    <li>Minimalne zanieczyszczenie światłem</li>
+                </ul>
+                <p>Najlepsze miejsca to obszary oddalone od miast, np. Park Narodowy Þingvellir, plaża Reynisfjara, laguna Jökulsárlón czy półwysep Snæfellsnes. Warto też rozważyć zorganizowaną wycieczkę z przewodnikiem, który zna najlepsze lokalizacje i śledzi prognozy.</p>`;
+            }
+            else if (question.includes("budżet") || question.includes("koszty") || question.includes("ceny") || question.includes("drogie")) {
+                response = `<h4>Jak podróżować po Islandii w rozsądnym budżecie?</h4>
+                <p>Islandia jest drogim krajem, ale można ograniczyć wydatki:</p>
+                <ul>
+                    <li>Podróżuj poza szczytem sezonu (czerwiec-sierpień)</li>
+                    <li>Rezerwuj zakwaterowanie z wyprzedzeniem, rozważ hostele lub camping</li>
+                    <li>Kupuj żywność w supermarketach (Bonus, Kronan) zamiast jadać w restauracjach</li>
+                    <li>Korzystaj z darmowych atrakcji (większość wodospadów, plaż, gór)</li>
+                    <li>Rozważ transport publiczny lub podziel koszty wynajmu samochodu z innymi podróżnymi</li>
+                    <li>Unikaj kupowania butelkowanej wody (kranówka w Islandii jest doskonałej jakości)</li>
+                </ul>
+                <p>Minimalistyczny budżet to około 100-150 EUR dziennie na osobę, średni to 200-300 EUR.</p>`;
+            }
+            else if (question.includes("samochód") || question.includes("auto") || question.includes("jazda") || question.includes("drogi")) {
+                response = `<h4>Jaki samochód wynająć i jak jeździć po Islandii?</h4>
+                <p>Wybór samochodu zależy od sezonu i planowanej trasy:</p>
+                <ul>
+                    <li>Latem na Ring Road (drogę nr 1) wystarczy zwykły samochód osobowy</li>
+                    <li>Od października do kwietnia zalecany jest pojazd z napędem 4x4 ze względu na warunki zimowe</li>
+                    <li>Do jazdy po drogach F (górskich, dostępnych tylko latem) konieczny jest samochód 4x4 z wyższym prześwitem</li>
+                </ul>
+                <p>Ważne wskazówki:</p>
+                <ul>
+                    <li>Sprawdzaj prognozy pogody na stronie weather.is</li>
+                    <li>Tankuj gdy tylko masz okazję, stacje paliw mogą być oddalone od siebie</li>
+                    <li>Nie zjeżdżaj z wyznaczonych dróg (surowe kary)</li>
+                    <li>Zachowaj ostrożność przy mostach jednopasowych</li>
+                    <li>Rozważ ubezpieczenie od żwiru, wiatru i popiołu wulkanicznego</li>
+                </ul>`;
+            }
+            else if (question.includes("kiedy") || question.includes("pora roku") || question.includes("sezon") || question.includes("pogoda")) {
+                response = `<h4>Kiedy najlepiej odwiedzić Islandię?</h4>
+                <p>Każda pora roku ma swoje zalety:</p>
+                <p><strong>Lato (czerwiec-sierpień):</strong> Najcieplejszy okres (10-15°C), prawie całodobowy dzień, dostępne wszystkie drogi, idealne do hikingu. Minus to wyższe ceny i tłumy turystów.</p>
+                <p><strong>Jesień (wrzesień-październik):</strong> Mniej turystów, niższe ceny, szansa na zorzę polarną, piękne kolory natury. Pogoda jest bardziej kapryśna.</p>
+                <p><strong>Zima (listopad-marzec):</strong> Zorza polarna, lodowe jaskinie, zimowe krajobrazy. Dzień trwa tylko 4-6 godzin, wiele dróg jest zamkniętych, wymagane doświadczenie w zimowej jeździe.</p>
+                <p><strong>Wiosna (kwiecień-maj):</strong> Wydłużający się dzień, odradzająca się natura, mniej turystów. Pogoda jest nadal nieprzewidywalna, niektóre górskie drogi wciąż zamknięte.</p>
+                <p>Złoty kompromis to często wrzesień lub maj - umiarkowana pogoda, mniej turystów, niższe ceny.</p>`;
+            }
+            else {
+                // Domyślna odpowiedź
+                response = `<h4>Informacje o podróżowaniu po Islandii</h4>
+                <p>Islandia to fascynujący kraj pełen kontrastów - od gejzerów i gorących źródeł po lodowce i wodospady. Oto kilka podstawowych informacji:</p>
+                <ul>
+                    <li>Najlepszy czas na zorze polarne: wrzesień-kwiecień</li>
+                    <li>Najlepszy czas na hiking: czerwiec-sierpień</li>
+                    <li>Pełny objazd Ring Road zajmuje minimum 7 dni</li>
+                    <li>Warto wynająć samochód, idealne na krótki pobyt jest zwiedzanie Złotego Kręgu</li>
+                    <li>Przyda się karta kredytowa - płatności bezgotówkowe są powszechne</li>
+                    <li>Kranówka jest doskonałej jakości - nie kupuj butelkowanej wody</li>
+                </ul>
+                <p>Czy mogę pomóc w zaplanowaniu konkretnych aspektów Twojej podróży?</p>`;
+            }
+            
+            return response;
+        }
+
+        // Konfiguracja dla sekcji wiadomości
+        const NEWS_CONFIG = {
+            RSS_FEEDS: [
+                {
+                    url: 'https://icelandmonitor.mbl.is/rss/',
+                    name: 'Iceland Monitor'
+                },
+                {
+                    url: 'https://grapevine.is/feed/',
+                    name: 'Reykjavik Grapevine'
+                },
+                {
+                    url: 'https://icelandreview.com/feed/',
+                    name: 'Iceland Review'
+                }
+            ],
+            INITIAL_NEWS_COUNT: 3,
+            MAX_NEWS_COUNT: 10,
+            PROXY_URLS: [
+                'https://api.rss2json.com/v1/api.json?rss_url=',
+                'https://api.allorigins.win/raw?url=',
+                'https://corsproxy.io/?'
+            ],
+            CACHE_TIME: 5 * 60 * 1000 // 5 minut
+        };
+
+        // Cache dla wiadomości
+        let newsCache = {
+            data: null,
+            timestamp: null
+        };
+
+        // Funkcja pomocnicza do sprawdzania poprawności odpowiedzi
+        function isValidResponse(text) {
+            try {
+                // Próba parsowania jako JSON (dla rss2json)
+                const json = JSON.parse(text);
+                if (json.status === 'ok' && json.items) {
+                    return true;
+                }
+            } catch (e) {
+                // Jeśli nie jest to JSON, sprawdź czy to XML
+                try {
+                    const parser = new DOMParser();
+                    const xml = parser.parseFromString(text, 'text/xml');
+                    const parserError = xml.querySelector('parsererror');
+                    return !parserError;
+                } catch (e) {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        // Funkcja pobierająca wiadomości z RSS z obsługą wielu proxy
+        async function fetchWithProxy(url, proxyIndex = 0) {
+            if (proxyIndex >= NEWS_CONFIG.PROXY_URLS.length) {
+                throw new Error('Wszystkie proxy zawiodły');
+            }
+
+            try {
+                const proxyUrl = NEWS_CONFIG.PROXY_URLS[proxyIndex] + encodeURIComponent(url);
+                console.log(`Próba użycia proxy: ${NEWS_CONFIG.PROXY_URLS[proxyIndex]}`);
+                
+                // Dodaj timeout 10 sekund
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 10000);
+                
+                try {
+                    const response = await fetch(proxyUrl, {
+                        signal: controller.signal,
+                        headers: {
+                            'Accept': 'application/json, application/xml, text/xml, text/plain',
+                            'Cache-Control': 'no-cache'
+                        }
+                    });
+                    
+                    clearTimeout(timeoutId);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const text = await response.text();
+                    
+                    // Sprawdź, czy otrzymany tekst jest poprawny
+                    if (!isValidResponse(text)) {
+                        throw new Error('Otrzymano niepoprawny format danych');
+                    }
+                    
+                    return text;
+                } catch (fetchError) {
+                    clearTimeout(timeoutId);
+                    if (fetchError.name === 'AbortError') {
+                        throw new Error('Przekroczono limit czasu połączenia');
+                    }
+                    throw fetchError;
+                }
+            } catch (error) {
+                console.warn(`Proxy ${NEWS_CONFIG.PROXY_URLS[proxyIndex]} zawiodło:`, error);
+                // Spróbuj z następnym proxy
+                return fetchWithProxy(url, proxyIndex + 1);
+            }
+        }
+
+        // Funkcja parsująca dane RSS
+        function parseRSSData(text, feed) {
+            try {
+                // Próba parsowania jako JSON (dla rss2json)
+                const json = JSON.parse(text);
+                if (json.status === 'ok' && json.items) {
+                    return json.items.map(item => ({
+                        title: item.title,
+                        description: item.description.replace(/<[^>]*>/g, '').substring(0, 200) + '...',
+                        link: item.link,
+                        pubDate: new Date(item.pubDate),
+                        source: feed.name,
+                        image: item.thumbnail || item.enclosure?.link || 'https://images.unsplash.com/photo-1494870363241-b5225be3dada?auto=format&fit=crop&w=500&q=60'
+                    }));
+                }
+            } catch (e) {
+                // Jeśli nie jest to JSON, parsuj jako XML
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(text, 'text/xml');
+                const items = xml.querySelectorAll('item');
+                
+                return Array.from(items).map(item => {
+                    const title = item.querySelector('title')?.textContent;
+                    const description = item.querySelector('description')?.textContent;
+                    const link = item.querySelector('link')?.textContent;
+                    const pubDateText = item.querySelector('pubDate')?.textContent;
+                    
+                    if (!title || !description || !link || !pubDateText) {
+                        return null;
+                    }
+                    
+                    const pubDate = new Date(pubDateText);
+                    if (isNaN(pubDate.getTime())) {
+                        return null;
+                    }
+                    
+                    // Próba znalezienia obrazu
+                    let image = '';
+                    const mediaContent = item.querySelector('media\\:content, content');
+                    const enclosure = item.querySelector('enclosure');
+                    
+                    if (mediaContent && mediaContent.getAttribute('url')) {
+                        image = mediaContent.getAttribute('url');
+                    } else if (enclosure && enclosure.getAttribute('url')) {
+                        image = enclosure.getAttribute('url');
+                    } else {
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = description;
+                        const firstImg = tempDiv.querySelector('img');
+                        if (firstImg) {
+                            image = firstImg.src;
+                        }
+                    }
+                    
+                    return {
+                        title,
+                        description: description.replace(/<[^>]*>/g, '').substring(0, 200) + '...',
+                        link,
+                        pubDate,
+                        source: feed.name,
+                        image: image || 'https://images.unsplash.com/photo-1494870363241-b5225be3dada?auto=format&fit=crop&w=500&q=60'
+                    };
+                }).filter(item => item !== null);
+            }
+        }
+
+        // Funkcja pobierająca wiadomości z RSS
+        async function fetchNews() {
+            try {
+                // Sprawdź cache
+                if (newsCache.data && newsCache.timestamp && (Date.now() - newsCache.timestamp < NEWS_CONFIG.CACHE_TIME)) {
+                    console.log('Używam wiadomości z cache');
+                    return newsCache.data;
+                }
+
+                const allNews = [];
+                const newsContainer = document.getElementById('news-container');
+                
+                if (!newsContainer) {
+                    throw new Error('Nie znaleziono kontenera wiadomości');
+                }
+                
+                // Pokaż loader
+                newsContainer.innerHTML = `
+                    <div class="loading">
+                        <p>Ładowanie wiadomości...</p>
+                        <p style="font-size: 0.9rem; color: var(--iceland-gray);">To może potrwać kilka sekund</p>
+                        <p style="font-size: 0.8rem; color: var(--iceland-gray);">Pobieranie z ${NEWS_CONFIG.RSS_FEEDS.length} źródeł</p>
+                    </div>
+                `;
+                
+                console.log('Rozpoczynam pobieranie wiadomości...');
+                
+                for (const feed of NEWS_CONFIG.RSS_FEEDS) {
+                    try {
+                        console.log(`Pobieranie feed'u: ${feed.name}`);
+                        const text = await fetchWithProxy(feed.url);
+                        const items = parseRSSData(text, feed);
+                        
+                        if (items && items.length > 0) {
+                            allNews.push(...items);
+                            
+                            // Aktualizuj loader o status
+                            const loadingDiv = newsContainer.querySelector('.loading');
+                            if (loadingDiv) {
+                                loadingDiv.innerHTML += `
+                                    <p style="font-size: 0.8rem; color: var(--iceland-gray);">
+                                        ✓ Pobrano ${items.length} wiadomości z ${feed.name}
+                                    </p>
+                                `;
+                            }
+                        }
+                    } catch (feedError) {
+                        console.error(`Błąd podczas pobierania feed'u ${feed.name}:`, feedError);
+                        // Aktualizuj loader o błąd
+                        const loadingDiv = newsContainer.querySelector('.loading');
+                        if (loadingDiv) {
+                            loadingDiv.innerHTML += `
+                                <p style="font-size: 0.8rem; color: #d32f2f;">
+                                    ✗ Błąd podczas pobierania z ${feed.name}
+                                </p>
+                            `;
+                        }
+                    }
+                }
+                
+                if (allNews.length === 0) {
+                    throw new Error('Nie udało się pobrać żadnych wiadomości');
+                }
+                
+                console.log(`Pobrano łącznie ${allNews.length} wiadomości`);
+                
+                // Sortuj wiadomości po dacie (najnowsze pierwsze)
+                const sortedNews = allNews.sort((a, b) => b.pubDate - a.pubDate);
+                
+                // Zapisz do cache
+                newsCache = {
+                    data: sortedNews,
+                    timestamp: Date.now()
+                };
+                
+                return sortedNews;
+            } catch (error) {
+                console.error('Błąd podczas pobierania wiadomości:', error);
+                throw error;
+            }
+        }
+
+        // Funkcja wyświetlająca wiadomości
+        function displayNews(news, expanded = false) {
+            const newsContainer = document.getElementById('news-container');
+            const loadMoreBtn = document.getElementById('load-more-news');
+            const loadLessBtn = document.getElementById('load-less-news');
+            
+            if (!newsContainer) return;
+            
+            if (news.length === 0) {
+                newsContainer.innerHTML = '<div class="error-message">Nie udało się załadować wiadomości. Spróbuj ponownie później.</div>';
+                return;
+            }
+            
+            newsContainer.innerHTML = '';
+            const newsToShow = expanded ? news : news.slice(0, NEWS_CONFIG.INITIAL_NEWS_COUNT);
+            
+            newsToShow.forEach(item => {
+                const newsCard = document.createElement('div');
+                newsCard.className = 'news-card animate-fade-in';
+                
+                const date = new Intl.DateTimeFormat('pl-PL', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                }).format(item.pubDate);
+                
+                newsCard.innerHTML = `
+                    <div class="news-image-container">
+                        <img src="${item.image}" alt="${item.title}" class="news-image" 
+                             onerror="this.src='https://images.unsplash.com/photo-1494870363241-b5225be3dada?auto=format&fit=crop&w=500&q=60'">
+                        <span class="news-source-badge">${item.source}</span>
+                    </div>
+                    <div class="news-content">
+                        <h3 class="news-title">${item.title}</h3>
+                        <p class="news-description">${item.description}</p>
+                        <div class="news-metadata">
+                            <span class="news-date">${date}</span>
+                            <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="news-link">Czytaj więcej</a>
+                        </div>
+                    </div>
+                `;
+                
+                newsContainer.appendChild(newsCard);
+            });
+            
+            // Aktualizuj widoczność przycisków
+            if (loadMoreBtn) loadMoreBtn.style.display = expanded || news.length <= NEWS_CONFIG.INITIAL_NEWS_COUNT ? 'none' : 'block';
+            if (loadLessBtn) loadLessBtn.style.display = expanded && news.length > NEWS_CONFIG.INITIAL_NEWS_COUNT ? 'block' : 'none';
+        }
+
+        // Funkcja inicjalizująca sekcję wiadomości
+        async function initNewsSection() {
+            console.log('Inicjalizacja sekcji wiadomości...');
+            const newsSection = document.getElementById('news');
+            if (!newsSection) {
+                console.error('Nie znaleziono sekcji wiadomości (id="news")');
+                return;
+            }
+            
+            try {
+                const news = await fetchNews();
+                displayNews(news, false);
+                
+                // Obsługa przycisków "Pokaż więcej" i "Pokaż mniej"
+                const loadMoreBtn = document.getElementById('load-more-news');
+                const loadLessBtn = document.getElementById('load-less-news');
+                const refreshBtn = document.getElementById('refresh-news');
+                
+                if (loadMoreBtn) {
+                    loadMoreBtn.addEventListener('click', () => displayNews(news, true));
+                }
+                if (loadLessBtn) {
+                    loadLessBtn.addEventListener('click', () => displayNews(news, false));
+                }
+                if (refreshBtn) {
+                    refreshBtn.addEventListener('click', async () => {
+                        refreshBtn.disabled = true;
+                        try {
+                            await refreshNews();
+                        } finally {
+                            refreshBtn.disabled = false;
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Błąd podczas inicjalizacji sekcji wiadomości:', error);
+                const newsContainer = document.getElementById('news-container');
+                if (newsContainer) {
+                    newsContainer.innerHTML = `
+                        <div class="error-message">
+                            Wystąpił błąd podczas ładowania wiadomości.
+                            <button class="retry-button" id="retry-news">Spróbuj ponownie</button>
+                        </div>
+                    `;
+                    // Dodaj event listener do przycisku
+                    const retryBtn = document.getElementById('retry-news');
+                    if (retryBtn) {
+                        retryBtn.addEventListener('click', () => {
+                            initNewsSection().catch(error => {
+                                console.error('Błąd podczas ponownej próby:', error);
+                            });
+                        });
+                    }
+                }
+            }
+        }
+
+        // Funkcja inicjalizująca aplikację
+        function initApp() {
+            // Ustaw aktualne dane formularzy na podstawie localStorage (jeśli istnieją)
+            try {
+                const hotelSearch = JSON.parse(localStorage.getItem("hotelSearch"));
+                if (hotelSearch) {
+                    document.querySelector("#arrival-date").value = hotelSearch.arrivalDate;
+                    document.querySelector("#departure-date").value = hotelSearch.departureDate;
+                    document.querySelector("#guests").value = hotelSearch.guests;
+                }
+                
+                const carSearch = JSON.parse(localStorage.getItem("carSearch"));
+                if (carSearch) {
+                    document.querySelector("#car-type").value = carSearch.carType;
+                    document.querySelector("#pickup-date").value = carSearch.pickupDate;
+                    document.querySelector("#return-date").value = carSearch.returnDate;
+                }
+                
+                const budgetCalc = JSON.parse(localStorage.getItem("budgetCalculation"));
+                if (budgetCalc) {
+                    document.querySelector("#days").value = budgetCalc.days;
+                    document.querySelector("#accommodation").value = budgetCalc.accommodation;
+                    document.querySelector("#activities").value = budgetCalc.activities;
+                    document.querySelector("#transport").value = budgetCalc.transport;
+                    document.querySelector("#food").value = budgetCalc.food;
+                    document.querySelector("#persons").value = budgetCalc.persons;
+                }
+            } catch (e) {
+                console.error("Błąd przy odczycie danych z localStorage:", e);
+                localStorage.clear();
+            }
+            
+            // Ustaw dzisiejsze daty dla formularzy
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            const formatDate = (date) => {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+            
+            // Ustaw domyślne daty
+            if (!document.querySelector("#arrival-date").value) {
+                document.querySelector("#arrival-date").value = formatDate(today);
+            }
+            if (!document.querySelector("#departure-date").value) {
+                document.querySelector("#departure-date").value = formatDate(tomorrow);
+            }
+            
+            if (!document.querySelector("#pickup-date").value) {
+                document.querySelector("#pickup-date").value = formatDate(today);
+            }
+            if (!document.querySelector("#return-date").value) {
+                document.querySelector("#return-date").value = formatDate(tomorrow);
+            }
+            
+            // Inicjalizuj sekcję wiadomości
+            console.log('Inicjalizacja sekcji wiadomości...');
+            initNewsSection().catch(error => {
+                console.error('Błąd podczas inicjalizacji wiadomości:', error);
+            });
+            
+            // Animacje przy przewijaniu
+            initScrollAnimations();
+        }
+
+        // Inicjalizacja aplikacji po załadowaniu strony
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log('Strona załadowana, inicjalizacja aplikacji...');
+            initApp();
+        });
+
+        // Funkcja odświeżająca wiadomości
+        async function refreshNews() {
+            // Wyczyść cache
+            newsCache = {
+                data: null,
+                timestamp: null
+            };
+            
+            try {
+                const news = await fetchNews();
+                displayNews(news, false);
+            } catch (error) {
+                console.error('Błąd podczas odświeżania wiadomości:', error);
+                const newsContainer = document.getElementById('news-container');
+                if (newsContainer) {
+                    newsContainer.innerHTML = `
+                        <div class="error-message">
+                            Wystąpił błąd podczas odświeżania wiadomości.
+                            <button class="retry-button" id="retry-news">Spróbuj ponownie</button>
+                        </div>
+                    `;
+                    document.getElementById('retry-news')?.addEventListener('click', refreshNews);
+                }
+            }
+        }
+
+        // Inicjalizacja po załadowaniu strony
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicjalizacja sekcji wiadomości
+            initNewsSection();
+            
+            // Obsługa formularzy
+            const hotelForm = document.querySelector("#hotel-form");
+            if (hotelForm) {
+                hotelForm.addEventListener("submit", handleHotelSubmit);
+            }
+
+            const carForm = document.querySelector("#car-form");
+            if (carForm) {
+                carForm.addEventListener("submit", handleCarSubmit);
+            }
+
+            const planningForm = document.querySelector("#planning-form");
+            if (planningForm) {
+                planningForm.addEventListener("submit", handlePlanningSubmit);
+            }
+
+            const budgetForm = document.querySelector("#budget-form");
+            if (budgetForm) {
+                budgetForm.addEventListener("submit", handleBudgetSubmit);
+            }
+
+            // Obsługa formularza AI
+            const aiForm = document.querySelector("#ai-form");
+            if (aiForm) {
+                aiForm.addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    
+                    const question = document.querySelector("#ai-question").value;
+                    
+                    if (!question) {
+                        alert("Proszę wprowadzić pytanie.");
+                        return;
+                    }
+                    
+                    // Symulacja odpowiedzi AI
+                    const button = this.querySelector("button");
+                    button.disabled = true;
+                    button.textContent = "Generowanie odpowiedzi...";
+                    
+                    setTimeout(() => {
+                        const aiResponse = generateAIResponse(question);
+                        document.querySelector("#ai-response").innerHTML = aiResponse;
+                        document.querySelector("#ai-response").classList.add("active");
+                        
+                        button.disabled = false;
+                        button.textContent = "Zapytaj AI";
+                        
+                        // Animacja wskazująca, że AI "myśli"
+                        document.querySelector("#ai-response").classList.add("animate-pulse");
+                        setTimeout(() => {
+                            document.querySelector("#ai-response").classList.remove("animate-pulse");
+                        }, 1000);
+                    }, 2000);
+                });
+            }
+        });
+
+        // Funkcja inicjalizująca animacje przy przewijaniu
+        function initScrollAnimations() {
+            const elements = document.querySelectorAll('.weather-card, .news-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            elements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(element);
+            });
+        }
+
+        // Obsługa formularzy
+        const hotelForm = document.querySelector("#hotel-form");
+        if (hotelForm) {
+            hotelForm.addEventListener("submit", handleHotelSubmit);
+        }
+
+        const carForm = document.querySelector("#car-form");
+        if (carForm) {
+            carForm.addEventListener("submit", handleCarSubmit);
+        }
+
+        const planningForm = document.querySelector("#planning-form");
+        if (planningForm) {
+            planningForm.addEventListener("submit", handlePlanningSubmit);
+        }
+
+        const budgetForm = document.querySelector("#budget-form");
+        if (budgetForm) {
+            budgetForm.addEventListener("submit", handleBudgetSubmit);
+        }
+
+        // Obsługa formularza AI
+        document.querySelector("#ai-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const question = document.querySelector("#ai-question").value;
+            
+            if (!question) {
+                alert("Proszę wprowadzić pytanie.");
+                return;
+            }
+            
+            // Symulacja odpowiedzi AI
+            const button = this.querySelector("button");
+            button.disabled = true;
+            button.textContent = "Generowanie odpowiedzi...";
+            
+            setTimeout(() => {
+                const aiResponse = generateAIResponse(question);
+                document.querySelector("#ai-response").innerHTML = aiResponse;
+                document.querySelector("#ai-response").classList.add("active");
+                
+                button.disabled = false;
+                button.textContent = "Zapytaj AI";
+                
+                // Animacja wskazująca, że AI "myśli"
+                document.querySelector("#ai-response").classList.add("animate-pulse");
+                setTimeout(() => {
+                    document.querySelector("#ai-response").classList.remove("animate-pulse");
+                }, 1000);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
